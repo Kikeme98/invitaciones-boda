@@ -1,0 +1,69 @@
+---
+const { data } = Astro.props;
+const indicaciones = data.indicaciones;
+---
+
+<div class="container">
+  <h1>Indicaciones</h1>
+  <div class="indicaciones">
+    {
+      indicaciones.map((indicacion, index) => (
+        <div class="card">
+          <div class="card-body">
+            <img
+              src={indicacion.imagen}
+              alt={indicacion.titulo}
+              style="width: 50px"
+            />
+            <h1 class="card-title">{indicacion.titulo.toUpperCase()}</h1>
+            <p class="card-text">{indicacion.descripcion}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .container > h1 {
+    color: #96a0a9 !important;
+    font-size: 3rem;
+  }
+  .indicaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .card-body {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center
+  }
+  .card-body > h1 {
+    color: #96a0a9 !important;
+    font-size: 2em;
+  }
+  @media screen and (min-width: 768px)
+  {
+    .indicaciones {
+      flex-direction: row;
+      gap: 20px;
+      justify-content: space-around;
+      width: 50vw;
+    }
+    
+  }
+</style>

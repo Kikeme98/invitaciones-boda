@@ -1,0 +1,228 @@
+---
+import fondo from "../imgs/fondo.png";
+import foto1 from "../imgs/foto1.jpg";
+import foto2 from "../imgs/foto2.jpg";
+import foto3 from "../imgs/foto3.jpg";
+import Image from "astro/components/Image.astro";
+const { data } = Astro.props;
+console.log(data);
+const TIMESTAMP_END = data.fecha * 1000;
+---
+
+<div class="countdown" style={{ backgroundImage: `url(${fondo})` }}>
+  <h2>SAVE THE DATE</h2>
+  <h3>
+    {data.lugar.toUpperCase()}
+  </h3>
+  <div class="fecha">
+    <p>
+      {
+        new Date(TIMESTAMP_END).toLocaleDateString("es-ES", {
+          day: "numeric",
+        })
+      }
+    </p>
+    •
+    <p>
+      {
+        new Date(TIMESTAMP_END).toLocaleDateString("es-ES", {
+          month: "numeric",
+        })
+      }
+    </p>
+    •
+    <p>
+      {
+        new Date(TIMESTAMP_END).toLocaleDateString("es-ES", {
+          year: "numeric",
+        })
+      }
+    </p>
+  </div>
+  <p>FALTAN:</p>
+  <div data-date={TIMESTAMP_END}>
+    <div data-days>
+      <span> </span>
+      <p>DÍA(S)</p>
+    </div>
+    <div data-hours>
+      <span></span>
+      <p>HORA(S)</p>
+    </div>
+    <div data-minutes>
+      <span></span>
+      <p>MINUTO(S)</p>
+    </div>
+    <div data-seconds>
+      <span></span>
+      <p>SEGUNDO(S)</p>
+    </div>
+  </div>
+  <div
+    class="add-to-calendar"
+  >
+    <button
+      style={{
+        backgroundColor: "#cfc4c2",
+        color: "white",
+        padding: ".5rem 1rem",
+        border: "none",
+        borderRadius: "20px",
+        cursor: "pointer",
+        marginTop: "1rem",
+        fontSize: "1rem",
+        
+      }}
+      onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240727T234500Z%2F20240728T213000Z&details=Los%20mejores%20momentos%20de%20la%20vida%20merecen%20ser%20compartidos%2C%20gracias%20por%20celebrar%20con%20nosotros.&location=San%20Pedro%20Garza%20Garcia%2C%20NL&text=Boda%20Karen%20%26%20Kevin%20')"
+    >AGREGAR A CALENDARIO</button>
+  </div>
+  <div class="fotos">
+    <Image src={foto1} alt="foto1" height={500} />
+    <Image src={foto2} alt="foto2" height={500} />
+    <Image src={foto3} alt="foto3" height={500} />
+  </div>
+</div>
+
+<script>
+  const SECOND = 1000;
+  const MINUTE = 60 * SECOND;
+  const HOUR = 60 * MINUTE;
+  const DAY = 24 * HOUR;
+
+  function init() {
+    const $countdown = document.querySelector("[data-date]");
+    if (!$countdown) return;
+    console.log($countdown);
+    const $days = $countdown.querySelector("[data-days] > span");
+    const $hours = $countdown.querySelector("[data-hours] > span");
+    const $minutes = $countdown.querySelector("[data-minutes] > span");
+    const $seconds = $countdown.querySelector("[data-seconds] > span");
+
+    const timespamp = $countdown.getAttribute("data-date");
+    const date = new Date(+timespamp).getTime();
+    console.log(date);
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = date - now;
+
+      if ($days instanceof HTMLElement) {
+        $days.innerText = Math.floor(distance / DAY).toString();
+      }
+      if ($hours instanceof HTMLElement) {
+        $hours.innerText = Math.floor((distance % DAY) / HOUR).toString();
+      }
+      if ($minutes instanceof HTMLElement) {
+        $minutes.innerText = Math.floor((distance % HOUR) / MINUTE).toString();
+      }
+      if ($seconds instanceof HTMLElement) {
+        $seconds.innerText = Math.floor((distance % MINUTE) / SECOND).toString();
+      }
+    }, 1000);
+  }
+
+  init();
+</script>
+
+<style>
+  .add-to-calendar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .fotos {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    gap: 3rem;
+    flex-direction: column;
+  }
+  .fecha {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 300px;
+    background-color: #cfc4c2;
+    color: white;
+  }
+
+  .fecha > p {
+    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
+    color: white !important;
+  }
+  .countdown > p {
+    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
+    color: #a3a3a3 !important;
+    font-size: 0.8rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .countdown > h2 {
+    margin-top: 5rem;
+    font-family: "Aboreto", sans-serif;
+    color: #96a0a9;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .countdown > h3 {
+    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
+    color: #a3a3a3 !important;
+    text-align: center;
+    font-weight: 300;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .countdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f1ed;
+    padding: 1rem;
+    padding-bottom: 7rem;
+  }
+  [data-date] {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    gap: .5rem;
+    font-size: 1.5rem;
+  }
+
+  [data-date] > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  [data-date] > div > span {
+    font-size: 2.5rem;
+    font-family: "Aboreto", sans-serif;
+
+    color: #cea7a1;
+  }
+  [data-date] > div > p {
+    font-size:.7rem;
+    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
+    color: #cea7a1 !important;
+  }
+
+  @media (min-width: 768px) {
+    [data-date] {
+      width: 30%;
+    }
+    .fotos {
+      flex-direction: row;
+    }
+  }
+</style>

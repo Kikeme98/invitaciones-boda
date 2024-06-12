@@ -1,0 +1,125 @@
+---
+const { data } = Astro.props;
+const itinerario = data.itinerario;
+
+import Image from "astro/components/Image.astro";
+---
+
+<div class="container">
+  <h1>ITINERARIO</h1>
+  <div class="itinerario">
+    {
+      itinerario.map((item, index) => {
+        return (
+          <>
+            <div>
+              <Image
+                src={item.imgLink}
+                alt={item.nombre}
+                width={60}
+                height={60}
+              />
+              <h1>{item.nombre.toUpperCase()}</h1>
+              <div>
+                <p>{item.lugar}</p>
+                <p>
+                  <strong>{item.hora} PM</strong>
+                </p>
+              </div>
+              <p>{item.direccion}</p>
+              <a href={item.mapsLink} target="_blank" rel="noopener noreferrer">
+                <button
+                  style={{
+                    backgroundColor: "#f5f5f5",
+                    color: "#96a0a9",
+                    padding: "0.5rem 1rem",
+                    marginTop: "1rem",
+                    borderRadius: "20px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <p
+                    style={{
+                      color: "#96a0a9",
+                    }}
+                  >
+                    Ver mapa
+                  </p>
+                </button>
+              </a>
+            </div>
+            <span class="line" />
+          </>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script></script>
+
+<style>
+  .container {
+    display: flex;
+    background-color: #cfc4c2;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+    padding-top: 50px;
+  }
+
+  .container > h1 {
+    color: white;
+    font-size: 3rem;
+  }
+
+  h1 {
+    color: white;
+  }
+  p {
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .itinerario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .itinerario > div {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+
+  .itinerario > div > div {
+    margin-bottom: 1rem;
+  }
+  .line {
+    display: block;
+    width: 1px;
+    height: 2px;
+    background-color: white;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .itinerario {
+      flex-direction: row;
+      gap: 20px;
+      justify-content: space-around;
+      width: 50vw;
+    }
+    .line {
+      display: none;
+    }
+  }
+</style>
