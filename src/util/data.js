@@ -12,7 +12,7 @@ const data = {
       hora: '17:45',
       direccion: 'Club Industrial, Av. Parte Aguas 698',
       imgLink: 'https://beourguest.com.mx/wp-content/uploads/2024/05/00543_civil.png',
-      mapsLink: 'https://goo.gl/maps/123456',
+      mapsLink: 'https://maps.app.goo.gl/2JcKirsXbq4nrE5j7',
     },
     {
       nombre: 'Recepción',
@@ -20,7 +20,7 @@ const data = {
       hora: '19:00',
       direccion: 'Club Industrial, Av. Parte Aguas 698',
       imgLink: 'https://beourguest.com.mx/wp-content/uploads/2024/05/00543_recep.png',
-      mapsLink: 'https://goo.gl/maps/456789',
+      mapsLink: 'https://maps.app.goo.gl/2JcKirsXbq4nrE5j7',
     },
   ],
   indicaciones: [
