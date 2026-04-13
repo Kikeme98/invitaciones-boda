@@ -2,15 +2,19 @@
 import  SpeedInsights  from "@vercel/speed-insights/astro"
 import Layout from "../layouts/Layout.astro";
 import data from "../util/data";
+import { getTheme } from "../util/themes";
 import Banner from "../components/Banner.astro";
 import Card from "../components/Card.astro";
 import SaveTheDay from "../components/SaveTheDay.astro";
 import Itinerario from "../components/Itinerario.astro";
 import Indicaciones from "../components/Indicaciones.astro";
 import Confirmacion from "../components/Confirmacion.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+
+const theme = getTheme(data.tema);
 ---
 
-<Layout title={data.nombreNovia + " & " + data.nombreNovio + " | Invitación Digital"}  >
+<Layout title={data.nombreNovia + " & " + data.nombreNovio + " | Invitación Digital"} theme={theme} >
   <SpeedInsights/>
   <Banner
 		data={data}
@@ -28,7 +32,5 @@ import Confirmacion from "../components/Confirmacion.astro";
   <Confirmacion
     data={data}
   />
+  <ThemeSwitcher />
 </Layout>
-
-
-

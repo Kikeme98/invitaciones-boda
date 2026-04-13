@@ -1,0 +1,180 @@
+---
+import themes from "../util/themes";
+const themesJson = JSON.stringify(themes);
+---
+
+<div class="theme-switcher" id="theme-switcher">
+  <button class="toggle-btn" id="toggle-themes" aria-label="Cambiar tema">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+    </svg>
+  </button>
+  <div class="theme-panel" id="theme-panel">
+    <p class="panel-title">ELIGE UN ESTILO</p>
+    {Object.entries(themes).map(([key, theme]) => (
+      <button class="theme-option" data-theme={key}>
+        <span class="color-preview">
+          <span style={`background-color: ${theme.colors.primary}`}></span>
+          <span style={`background-color: ${theme.colors.secondary}`}></span>
+          <span style={`background-color: ${theme.colors.accent}`}></span>
+        </span>
+        <span class="theme-name">{theme.nombre}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<script define:vars={{ themesJson }}>
+  const themes = JSON.parse(themesJson);
+  const loadedFonts = new Set();
+
+  function loadFonts(fontUrls) {
+    fontUrls.forEach(url => {
+      if (loadedFonts.has(url)) return;
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = url;
+      document.head.appendChild(link);
+      loadedFonts.add(url);
+    });
+  }
+
+  function applyTheme(themeKey) {
+    const theme = themes[themeKey];
+    if (!theme) return;
+
+    loadFonts(theme.fontUrls);
+
+    const root = document.documentElement;
+    root.style.setProperty('--color-primary', theme.colors.primary);
+    root.style.setProperty('--color-secondary', theme.colors.secondary);
+    root.style.setProperty('--color-accent', theme.colors.accent);
+    root.style.setProperty('--color-text-muted', theme.colors.textMuted);
+    root.style.setProperty('--color-bg', theme.colors.bg);
+    root.style.setProperty('--color-bg-card', theme.colors.bgCard);
+    root.style.setProperty('--font-heading', `"${theme.fonts.heading}", ${theme.fonts.headingFallback}`);
+    root.style.setProperty('--font-body', `"${theme.fonts.body}", ${theme.fonts.bodyFallback}`);
+
+    document.querySelectorAll('.theme-option').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-theme') === themeKey);
+    });
+  }
+
+  const toggleBtn = document.getElementById('toggle-themes');
+  const panel = document.getElementById('theme-panel');
+
+  if (toggleBtn && panel) {
+    toggleBtn.addEventListener('click', () => {
+      panel.classList.toggle('open');
+      toggleBtn.classList.toggle('open');
+    });
+  }
+
+  document.querySelectorAll('.theme-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const themeKey = btn.getAttribute('data-theme');
+      if (themeKey) applyTheme(themeKey);
+    });
+  });
+</script>
+
+<style>
+  .theme-switcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .toggle-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s, background-color 0.3s;
+  }
+
+  .toggle-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .toggle-btn.open {
+    background-color: #555;
+    transform: rotate(90deg);
+  }
+
+  .theme-panel {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+  }
+
+  .theme-panel.open {
+    display: flex;
+  }
+
+  .panel-title {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.1rem;
+    color: #999;
+    margin: 0 0 4px 0;
+    text-align: center;
+  }
+
+  .theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: #f8f8f8;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .theme-option:hover {
+    background: #f0f0f0;
+  }
+
+  .theme-option.active {
+    border-color: #333;
+    background: #f0f0f0;
+  }
+
+  .color-preview {
+    display: flex;
+    gap: 3px;
+  }
+
+  .color-preview > span {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-name {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #444;
+  }
+</style>

@@ -18,23 +18,23 @@
   .center{
     display: flex;
     justify-content: center;
-    background-color: #f2f1ed;
+    background-color: var(--color-bg);
     margin-bottom: -200px;
   }
   .container {
-    background-color: #f9f9f9;
+    background-color: var(--color-bg-card);
     padding: 40px;
     text-align: center;
-    z-index: 3;  /* Asegura que el contenedor esté por encima del gradiente */
-    position: relative;  /* Asegura que el contenedor sea posicionado correctamente */
+    z-index: 3;
+    position: relative;
     transform: translateY(-70%);
-    margin: 40px;  /* Centra el contenedor horizontalmente */
-    max-width: 800px;  /* Limita el ancho del contenedor */
+    margin: 40px;
+    max-width: 800px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
   .container p {
-    font-family: 'Andika', sans-serif !important;
+    font-family: var(--font-body);
     font-size: 1.2em;
   }
 </style>

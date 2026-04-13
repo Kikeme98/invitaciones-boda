@@ -58,21 +58,9 @@ const TIMESTAMP_END = data.fecha * 1000;
       <p>SEGUNDO(S)</p>
     </div>
   </div>
-  <div
-    class="add-to-calendar"
-  >
+  <div class="add-to-calendar">
     <button
-      style={{
-        backgroundColor: "#cfc4c2",
-        color: "white",
-        padding: ".5rem 1rem",
-        border: "none",
-        borderRadius: "20px",
-        cursor: "pointer",
-        marginTop: "1rem",
-        fontSize: "1rem",
-        
-      }}
+      class="btn-calendar"
       onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20261118T234500Z%2F20261119T090000Z&details=Los%20mejores%20momentos%20de%20la%20vida%20merecen%20ser%20compartidos%2C%20gracias%20por%20celebrar%20con%20nosotros.&location=San%20Pedro%20Garza%20Garcia%2C%20NL&text=Boda%20Karen%20%26%20Kevin%20')"
     >AGREGAR A CALENDARIO</button>
   </div>
@@ -132,6 +120,21 @@ const TIMESTAMP_END = data.fecha * 1000;
     gap: 1rem;
     margin-top: 2rem;
   }
+  .btn-calendar {
+    background-color: var(--color-primary);
+    color: white;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: background-color 0.2s;
+  }
+  .btn-calendar:hover {
+    background-color: var(--color-accent);
+  }
   .fotos {
     align-items: center;
     display: flex;
@@ -149,33 +152,33 @@ const TIMESTAMP_END = data.fecha * 1000;
     align-items: center;
     font-size: 1.5rem;
     width: 300px;
-    background-color: #cfc4c2;
+    background-color: var(--color-primary);
     color: white;
   }
 
   .fecha > p {
-    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
+    font-family: var(--font-body);
     color: white !important;
   }
   .countdown > p {
-    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
-    color: #a3a3a3 !important;
+    font-family: var(--font-body);
+    color: var(--color-text-muted) !important;
     font-size: 0.8rem;
     letter-spacing: 0.3rem;
   }
 
   .countdown > h2 {
     margin-top: 5rem;
-    font-family: "Aboreto", sans-serif;
-    color: #96a0a9;
+    font-family: var(--font-heading);
+    color: var(--color-secondary);
     text-align: center;
     font-size: 3rem;
     font-weight: 400;
     margin-bottom: 1rem;
   }
   .countdown > h3 {
-    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
-    color: #a3a3a3 !important;
+    font-family: var(--font-body);
+    color: var(--color-text-muted) !important;
     text-align: center;
     font-weight: 300;
     font-size: 1rem;
@@ -186,7 +189,7 @@ const TIMESTAMP_END = data.fecha * 1000;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f2f1ed;
+    background-color: var(--color-bg);
     padding: 1rem;
     padding-bottom: 7rem;
   }
@@ -207,14 +210,13 @@ const TIMESTAMP_END = data.fecha * 1000;
 
   [data-date] > div > span {
     font-size: 2.5rem;
-    font-family: "Aboreto", sans-serif;
-
-    color: #cea7a1;
+    font-family: var(--font-heading);
+    color: var(--color-accent);
   }
   [data-date] > div > p {
     font-size:.7rem;
-    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
-    color: #cea7a1 !important;
+    font-family: var(--font-body);
+    color: var(--color-accent) !important;
   }
 
   @media (min-width: 768px) {

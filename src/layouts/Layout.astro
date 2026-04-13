@@ -1,13 +1,28 @@
 ---
 interface Props {
   title: string;
+  theme: any;
 }
 
-const { title } = Astro.props;
+const { title, theme } = Astro.props;
+const { colors, fonts, fontUrls } = theme;
+
+const cssVars = `
+  :root {
+    --color-primary: ${colors.primary};
+    --color-secondary: ${colors.secondary};
+    --color-accent: ${colors.accent};
+    --color-text-muted: ${colors.textMuted};
+    --color-bg: ${colors.bg};
+    --color-bg-card: ${colors.bgCard};
+    --font-heading: "${fonts.heading}", ${fonts.headingFallback};
+    --font-body: "${fonts.body}", ${fonts.bodyFallback};
+  }
+`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Invitación Digital de Boda" />
@@ -15,18 +30,12 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
+    {fontUrls.map((url: string) => (
+      <link href={url} rel="stylesheet" />
+    ))}
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <style set:html={cssVars}></style>
   </head>
   <body>
     <slot />
@@ -42,11 +51,11 @@ const { title } = Astro.props;
   ::-webkit-scrollbar {
     width: 10px;
   }
-  p{
-    font-family: "Andika", Helvetica, Arial, Lucida, sans-serif;
+  p {
+    font-family: var(--font-body);
   }
-  h1{
-    font-family: "Aboreto", Helvetica, Arial, Lucida, sans-serif !important;
+  h1 {
+    font-family: var(--font-heading);
     font-weight: 400;
   }
 </style>

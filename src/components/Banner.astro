@@ -29,7 +29,7 @@ const { data } = Astro.props;
   .banner {
     position: relative;
     overflow: hidden;
-    z-index: 1; /* Asegura que el banner esté en el nivel correcto */
+    z-index: 1;
   }
 
   .banner-image {
@@ -71,7 +71,7 @@ const { data } = Astro.props;
   }
 
   .banner-content h1 {
-    font-family: "Aboreto", cursive;
+    font-family: var(--font-heading);
     font-weight: 400;
     font-size: 2.4rem;
     width: 100%;
@@ -82,7 +82,7 @@ const { data } = Astro.props;
     font-size: 1.1rem;
     margin: 0;
     letter-spacing: 0.3em;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font-body);
   }
 
   @media (min-width: 768px) {
@@ -106,10 +106,6 @@ const { data } = Astro.props;
       top: 70%;
       left: 50%;
       transform: translate(-50%, -50%);
-    }
-
-    .banner-image {
-      height: 70vh;
     }
 
     .gradient-bg {
