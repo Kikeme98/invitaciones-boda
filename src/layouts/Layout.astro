@@ -6,6 +6,19 @@ interface Props {
 
 const { title, theme } = Astro.props;
 const { colors, fonts, fontUrls } = theme;
+
+const cssVars = `
+  :root {
+    --color-primary: ${colors.primary};
+    --color-secondary: ${colors.secondary};
+    --color-accent: ${colors.accent};
+    --color-text-muted: ${colors.textMuted};
+    --color-bg: ${colors.bg};
+    --color-bg-card: ${colors.bgCard};
+    --font-heading: "${fonts.heading}", ${fonts.headingFallback};
+    --font-body: "${fonts.body}", ${fonts.bodyFallback};
+  }
+`;
 ---
 
 <!doctype html>
@@ -22,25 +35,14 @@ const { colors, fonts, fontUrls } = theme;
     ))}
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <style set:html={cssVars}></style>
   </head>
   <body>
     <slot />
   </body>
 </html>
 
-<style
-  is:global
-  define:vars={{
-    'color-primary': colors.primary,
-    'color-secondary': colors.secondary,
-    'color-accent': colors.accent,
-    'color-text-muted': colors.textMuted,
-    'color-bg': colors.bg,
-    'color-bg-card': colors.bgCard,
-    'font-heading': `"${fonts.heading}", ${fonts.headingFallback}`,
-    'font-body': `"${fonts.body}", ${fonts.bodyFallback}`,
-  }}
->
+<style is:global>
   body {
     margin: 0;
     padding: 0;
