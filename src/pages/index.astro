@@ -7,9 +7,10 @@ import Card from "../components/Card.astro";
 import SaveTheDay from "../components/SaveTheDay.astro";
 import Itinerario from "../components/Itinerario.astro";
 import Indicaciones from "../components/Indicaciones.astro";
+import Confirmacion from "../components/Confirmacion.astro";
 ---
 
-<Layout title={data.nombreNovia + " & " + data.nombreNovio + " DEMO Invitación Digital"}  >
+<Layout title={data.nombreNovia + " & " + data.nombreNovio + " | Invitación Digital"}  >
   <SpeedInsights/>
   <Banner
 		data={data}
@@ -22,6 +23,9 @@ import Indicaciones from "../components/Indicaciones.astro";
     data={data}
   />
   <Indicaciones
+    data={data}
+  />
+  <Confirmacion
     data={data}
   />
 </Layout>
