@@ -1,4 +1,5 @@
 const data = {
+  tema: 'rosa-clasico', // opciones: 'rosa-clasico', 'jardin-botanico', 'noche-elegante', 'lavanda-romantica'
   nombreNovio: 'Kevin',
   apellidoNovio: 'Adame',
   nombreNovia: 'Karen',
