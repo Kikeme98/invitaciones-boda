@@ -4,7 +4,7 @@ const data = {
   nombreNovia: 'Karen',
   lugar: 'San Pedro Garza García, NL',
   apellidoNovia: 'García',
-  fecha: '1722123900',
+  fecha: '1795045500',
   itinerario: [
     {
       nombre: 'Boda civil',
@@ -63,7 +63,7 @@ const data = {
       nombre: 'Karen García',
     },
   ],
-  invLink: 'https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240727T234500Z%2F20240728T090000Z&details=Los%20mejores%20momentos%20de%20la%20vida%20merecen%20ser%20compartidos%2C%20gracias%20por%20celebrar%20con%20nosotros.&location=San%20Pedro%20Garza%20Garc%C3%ADa&text=Boda%20Karen%20%26%20Kevin'
+  invLink: 'https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20261118T234500Z%2F20261119T090000Z&details=Los%20mejores%20momentos%20de%20la%20vida%20merecen%20ser%20compartidos%2C%20gracias%20por%20celebrar%20con%20nosotros.&location=San%20Pedro%20Garza%20Garc%C3%ADa&text=Boda%20Karen%20%26%20Kevin'
   
 };
 
