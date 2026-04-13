@@ -9,6 +9,7 @@ import SaveTheDay from "../components/SaveTheDay.astro";
 import Itinerario from "../components/Itinerario.astro";
 import Indicaciones from "../components/Indicaciones.astro";
 import Confirmacion from "../components/Confirmacion.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 
 const theme = getTheme(data.tema);
 ---
@@ -31,4 +32,5 @@ const theme = getTheme(data.tema);
   <Confirmacion
     data={data}
   />
+  <ThemeSwitcher />
 </Layout>
